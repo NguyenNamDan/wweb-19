@@ -9,6 +9,6 @@ function generate(testLengthArray){
     })
   ); // Remove this line and change to your own algorithm
 } 
-// em ko làm đc bài này ạ huhuh :v 
+// bài này e ko hiểu ạ huhuh :(
 
 module.exports = generate
