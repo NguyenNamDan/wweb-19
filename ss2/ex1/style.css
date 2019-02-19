@@ -1,0 +1,16 @@
+span {
+    background-color: #D5B0AC;
+    color: #402E2A;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 30px 10px 30px;
+}
+.it2:hover {
+    color: #FFFFFF;
+    background-color: #9CD08F;  
+}
+.menu_vertical>span {
+    display: block;
+    width: 50px;
+    margin-bottom: 1px;
+}

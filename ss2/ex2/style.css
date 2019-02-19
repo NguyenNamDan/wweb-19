@@ -1,0 +1,99 @@
+* {
+    position: relative;
+}
+.body {
+    margin: auto;
+    width: 70%;
+} 
+.header_title {
+    height: 300px;
+    background-image: url('./img/colourful-houses-in-qasigiannguit-in-greenland.jpg');
+    color: white;    
+}
+p {
+    margin: 0px 0px 0px 0px;
+}
+.title {
+    padding-left: 80px;
+    padding-top: 100px;
+}
+#title_home {
+    font-size: 30px;
+}
+.header1 {
+    margin: 30px 0px 30px 0px;
+    padding-left: 40px; 
+}
+.para1 {
+    font-size: 20px;
+}
+.para2 {
+    font-size: 15px;
+    color: #b5b8bc;
+}
+.place { 
+    background-color: #f2f3f4; 
+    height: 390px; 
+}
+.pic_left {
+    float: left;
+    width: 600px;
+}
+.city { 
+    float: left; 
+    margin: 20px 0px 0px 20px;
+    height: 165px;
+    width: 270px;
+}
+.mexico {
+    background-image: url("./img/palacio-de-bellas-artes-mexico-city-artreport.jpg");
+    background-size: 270px 165px;
+}
+.tokyo {
+    background-image: url("./img/intercontinental---ana-tokyo-4086842933-2x1.jpeg");
+    background-size: 270px 165px;
+}
+.newyork {
+    background-image: url("./img/download.jpeg");
+    background-size: 270px 165px;
+}
+.paris {
+    background-image: url("./img/images.jpeg");
+    background-size: 270px 165px; 
+}
+.name {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    top: 50px;
+}
+.pic_right {
+    float:left; 
+    background-image: url("./img/100021371.jpg");
+    background-size: 276px 350px;
+    height: 350px;
+    width: 276px;
+    margin-top: 20px;
+}
+.invite {
+    color: white; 
+    text-align: center;
+    top: 140px;
+}
+.footer {
+    float: left;
+    margin: 20px 0px 0px 20px;
+    height: 165px;
+    width: 270px;
+}
+h4 {
+    margin: 0px 0px 0px 0px;
+}
+.ps { 
+    font-size: 15px;
+    margin: 15px 0px 15px 0px;
+    color: #b5b8bc;
+}
+.url {
+    color: #6da4ed;
+}
