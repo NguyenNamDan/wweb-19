@@ -1,16 +1,25 @@
-span {
-    background-color: #D5B0AC;
-    color: #402E2A;
+.menu {
     text-align: center;
+}
+
+.menu span {
     display: inline-block;
-    padding: 10px 30px 10px 30px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
 }
-.it2:hover {
-    color: #FFFFFF;
-    background-color: #9CD08F;  
+
+.menu span:hover {
+    color: blue;
+    cursor: pointer;
 }
-.menu_vertical>span {
+
+.sub_menu {
+    display: none;
+    position: absolute; 
+}
+
+.menu span:hover > .sub_menu {
     display: block;
-    width: 50px;
-    margin-bottom: 1px;
 }

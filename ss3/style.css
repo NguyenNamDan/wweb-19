@@ -1,0 +1,81 @@
+* {
+    position: relative;
+    margin: 0px;
+}
+.dock {
+    width: 20%; 
+    position: fixed;
+    top: 0px; 
+    bottom: 0px;
+    left: 0px;
+    border-right: 2px solid #dcdee2;
+}
+.user img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30%;
+}
+.user p {
+    font-size: 30px;
+    margin-left: 20%;
+}
+.user {
+    margin-bottom: 30px;
+}
+.menu a { 
+    margin-top: 20px;
+    font-size: 15px;
+    color: black;
+    text-decoration: none; 
+    margin-left: 20%;
+}
+.menu {
+    display: flex;
+    flex-direction: column;
+} 
+.footer { 
+    position: absolute; 
+    bottom: 30px;
+    font-size: 15px;
+    color: #9b9fa5;
+    margin-left: 20%; 
+}
+.content {
+    width: 80%;
+    float: right;
+    margin-left: 50px;
+}
+.content>p {
+    font-size: 30px;
+    margin: 50px;
+}
+.servives {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 50px;
+}
+.list {
+    width: 30%; 
+    margin: 10px;
+}
+.image {
+    width: 70px;
+    height: 70px;
+    background-color: #9160f2; 
+}
+.image img {
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+}
+.list h3 {
+    margin: 20px 0px 20px 0px;
+}
+.list p {
+    font-size: 15px;
+    margin: 15px 0px 15px 0px;
+    color: #b5b8bc;
+}
