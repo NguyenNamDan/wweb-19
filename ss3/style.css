@@ -14,9 +14,7 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 30%;
+    margin: 20px 0px 20px 30%;
 }
 .user p {
     font-size: 30px;
