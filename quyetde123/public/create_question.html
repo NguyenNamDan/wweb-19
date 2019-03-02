@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./create_question.css"/> 
+    <title>Quyet De</title>
+</head>
+<body>
+    <h2>
+        Hãy hỏi cộng đồng một câu hỏi đúng/sai hoặc có/không
+    </h2>
+    <form action='/create_question' method='post'> 
+        <textarea class='input' name="content" id="content" cols="30" rows="10">
+        </textarea>
+        <div id='remain-character'>
+            200 characters left
+        </div>
+        <input type="submit" value="Gửi"> 
+    </form>
+    <script src="./create_question.js"></script>
+</body>
+</html>
