@@ -9,89 +9,50 @@ server.use(express.static("public")); // user thoai mai vao
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 
-const readFileJson = () => {
-  const data = JSON.parse(
-    fs.readFileSync("./data.json", "utf8", (err, data) => {
-      if (err) {
-        res.status(500).send("error"); //luon luon check
-      }
-    })
-  );
-  const index = randomInt(0, data.length - 1);
-  return data[index];
-};
-
 server.get("/", (req, res) => {
-  const question = readFileJson();
-  const All = question.yes + question.no;
-  const perYes = question.yes * 100 / All;
-  const perNo = 100 - perYes;
-  // console.log(question.content);
-  // const qs = document.getElementById('question');
-  // qs.innerText = question.content;
-  let homeHtml = fs.readFileSync("./public/home.html", "utf8");
-  fs.writeFile(
-    "./public/home.html",
-    homeHtml.replace("%question", question.content),
-    err => {
-      if (err) {
-        throw err;
-      }
-      console.log("ok!");
-    }
-  );
-  // res.status(200).sendFile(path.resolve(__dirname + "/public/home.html"));
-  res.status(200).send(homeHtml);
-});
+  res.status(200).sendFile(path.resolve(__dirname + '/public/home.html'));
+  // fs.readFile("./data.json", (err, data) => {
+  //   if (err) {
+  //     res.status(500).send("error"); //luon luon check
+  //   }
+  //   const question = JSON.parse(data);
+  //   const randomIndex = Math.floor(Math.random() * question.length);
+  //   const randomQuestion = question[randomIndex];
+  //   res.status(200).send(`
+  //   <!DOCTYPE html>
+  //   <html lang="en">
+  //   <head>
+  //       <meta charset="UTF-8">
+  //       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  //       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  //       <title>Quyet De</title>
+  //   </head>
+  //   <body>
+  //     <h2>${randomQuestion.content}</h2>
+  //     <div>
+  //       <form name= 'yes' method= 'get' action= '/vote/${randomQuestion.id}/yes'>
+  //         <input type= 'submit' value= 'yes'>
+  //       </form>
+  //       <form name= 'no' method= 'get' action= '/vote/${randomQuestion.id}/no'>
+  //         <input type= 'submit' value= 'no'>  
+  //       </form> 
+  //     </div>
 
-server.post("/", (req, res) => {
-  const data = JSON.parse(
-    fs.readFileSync("./data.json", "utf8", (err, data) => {
-      if (err) {
-        res.status(500).send("error"); //luon luon check
-      }
-    })
-  );
-  // console.log(data[0].yes);
-  // console.log(req.body.yesno);
-  const homeHtml = fs.readFileSync("./public/home.html", "utf8");
-  for (const obj in data) {
-    const bool = homeHtml.indexOf(data[obj].content);
-    // console.log(homeHtml);
-    // console.log(data[obj].content);
-    console.log(req.body.yesno);
-    if (bool != -1) {
-      if (req.body.yesno === "yes") {
-        data[obj].yes += 1;
-      } else {
-        data[obj].no += 1;
-      }
-      fs.writeFile(
-        "./public/home.html",
-        homeHtml.replace(data[obj].content, '%question'),
-        err => {
-          if (err) {
-            throw err;
-          }
-        }
-      );
-    }
-    fs.writeFile("./data.json", JSON.stringify(data), err => {
-      if (err) {
-        res.status(500).send("error"); //luon luon check
-      }
-    });
-  }
-  res.status(200).send("ok!");
+  //     <div>
+  //       <button id= 'question-result'>Result</button>  
+  //       <button id= 'other-question'>Other</button>  
+  //     </div>
+
+  //     <script src= './public/index.js'></script>
+  //   </body>
+  //   </html>
+  //   `);
+  // });
 });
 
 server.get("/create_question", (req, res) => {
-  res
-    .status(200)
-    .sendFile(path.resolve(__dirname + "/public/create_question.html"));
-});
+  const { contentQuestion } = req.query;
 
-server.post("/create_question", (req, res) => {
   fs.readFile("./data.json", (err, data) => {
     if (err) {
       res.status(500).send("error"); //luon luon check
@@ -99,7 +60,7 @@ server.post("/create_question", (req, res) => {
     const rawdata = JSON.parse(data); //JSON.stringify
     rawdata.push({
       id: rawdata.length,
-      content: req.body.content,
+      content: contentQuestion,
       yes: 0,
       no: 0,
       createdAt: new Date().toLocaleString()
@@ -109,6 +70,124 @@ server.post("/create_question", (req, res) => {
         res.status(500).send("error"); //luon luon check
       }
     });
+  });
+  res
+    .status(200)
+    .sendFile(path.resolve(__dirname + "/public/create_question.html"));
+});
+
+// server.post("/create_question", (req, res) => {
+//   const { contentQuestion } = req.query;
+
+//   fs.readFile("./data.json", (err, data) => {
+//     if (err) {
+//       res.status(500).send("error"); //luon luon check
+//     }
+//     const rawdata = JSON.parse(data); //JSON.stringify
+//     rawdata.push({
+//       id: rawdata.length,
+//       content: contentQuestion,
+//       yes: 0,
+//       no: 0,
+//       createdAt: new Date().toLocaleString()
+//     });
+//     fs.writeFile("./data.json", JSON.stringify(rawdata), err => {
+//       if (err) {
+//         res.status(500).send("error"); //luon luon check
+//       }
+//     });
+//   });
+// }); 
+
+server.get("/vote/:questionId/:vote", async (req, res) => {
+  const {questionId, vote} = req.params; // thay doi voi question khac nhau
+  console.log(questionId, vote); 
+
+  fs.readFile('./data.json', (err, data) => {
+    if (err) { 
+      res.status(500).send("error"); //luon luon check
+    }
+    const questions = JSON.parse(data);
+    for (let item of questions) {
+      if (item.id === Number(questionId)) {
+        vote === 'yes' ? item.yes += 1 : item.no += 1;
+        break; 
+      }
+    }
+
+    fs.writeFile('./data.json', JSON.stringify(question), (err) => {
+      if (err) {
+        res.status(500).send("error"); //luon luon check
+      } 
+      res.status(200).send('update!');
+    })
+  })
+}); 
+
+server.post("/vote", (req, res) => {
+  const { questionId, value } = req.query;
+
+  fs.readFile('./data.json', (err, data) => {
+    if (err) { 
+      res.status(500).send("error"); //luon luon check
+    }
+    const questions = JSON.parse(data);
+    if (value === 'yes') {
+      questions[questionId].yes += 1;
+    } else {
+      questions[questionId].no += 1;
+    }
+
+    fs.writeFile('./data.json', JSON.stringify(questions), (err) => {
+      if (err) {
+        res.status(500).send("error"); //luon luon check
+      } 
+      res.status(200).send('update!');
+    }) 
+  })
+}); 
+
+server.get('/result/:questionId', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname + '/public/vote-result.html'));
+});
+
+server.get('/get-question-by-id', (req, res) => { 
+  const questionId = req.query.questionId;   
+
+  fs.readFile('./data.json', (err, data) => {
+    if (err) {
+      res.status(500).send("error"); //luon luon check
+    }
+    const questions = JSON.parse(data);
+    let selectQuestion;
+    for (let item of questions) {
+      if (item.id === Number(questionId)) {
+        selectQuestion = item;
+        break;
+      }
+    }
+    if (selectQuestion) {
+      res.status(200).json(selectQuestion);
+    } else {
+      res.status(200).json({message: 'not found'}); 
+    }
+  });
+});
+
+server.get('/question-random', (req, res) => {
+  fs.readFile("./data.json", (err, data) => {
+    if (err) {
+      res.status(500).send("error"); //luon luon check
+    }
+    const question = JSON.parse(data); 
+    const randomIndex = Math.floor(Math.random() * question.length);
+    const randomQuestion = question[randomIndex];
+
+    if (randomQuestion) {
+      res.status(200).json(randomQuestion); 
+    } else {
+      res.status(200).json({message: 'not found'}); 
+    }
   });
 });
 
