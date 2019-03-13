@@ -31,8 +31,8 @@ window.onload = () => {
           content: questionContent,
         },
         success: (data) => {
-          if (data.id !== null) {
-            window.location.href = `/result/${data.id}`
+          if (data._id !== null) {
+            window.location.href = `/result/${data._id}`
           } else {
             window.alert('Failed to create question');
           }
