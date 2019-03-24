@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>PlayScreen</title>
+  </head>
+  <body>
+    <h1>ScoreKeeper</h1>
+    <div class="container">
+      <table class="table" id="tableRound">
+        <thead>
+          <tr>
+            <th></th>
+            <th id="keeper1"></th>
+            <th id="keeper2"></th>
+            <th id="keeper3"></th>
+            <th id="keeper4"></th>
+          </tr>
+        </thead>
+        <tbody id="add-round">
+          <tr>
+            <td>SoS</td> 
+            <td><input type="text" id="total1" /></td>
+            <td><input type="text" id="total2" /></td>
+            <td><input type="text" id="total3" /></td>
+            <td><input type="text" id="total4" /></td> 
+          </tr>
+          <tr>
+            <td>Round1</td>
+            <td><input type="text" id="r1k1" /></td>
+            <td><input type="text" id="r1k2" /></td>
+            <td><input type="text" id="r1k3" /></td>
+            <td><input type="text" id="r1k4" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="add">add round</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./play-screen.js"></script>
+  </body>
+</html>
