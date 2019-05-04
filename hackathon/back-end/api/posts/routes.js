@@ -1,4 +1,7 @@
 const express = require("express");
+const path = require("path");
+const multer = require("multer");
+const formidable = require("formidable");
 const ProductModel = require("./models");
 
 const productRouter = express();
@@ -20,22 +23,29 @@ productRouter.post("/", async (req, res) => {
   }
 });
 
-// productRouter.get("/:postId", async (req, res) => {
-//   try {
-//     const { postId } = req.params;
-//     const postInfo = await PostModel.findById(postId)
-//       // .populate('author', 'email firstName createdAt')
-//       .populate({
-//         path: "author",
-//         select: "email firstName lastName createdAt"
-//       })
-//       .exec();
+productRouter.get("/get-product-classify", async (req, res) => {
+  try {
+    const productQuery = req.query.classify; 
+    const productClassify = await ProductModel.find({"name": productQuery}).exec();
 
-//     res.status(200).json(postInfo);
-//   } catch (error) {
-//     res.status(500).end(error.message);
-//   }
-// });
+    res.status(200).json(productClassify);
+  } catch (error) {
+    res.status(500).end(error.message);
+  }
+});
+
+productRouter.get("/products", async (req, res) => {
+  try {
+    const allProducts = await ProductModel.find().exec();
+    res.status(200).json({
+      result: "ok",
+      data: allProducts,
+      message: "ok"
+    })
+  } catch (error) {
+    res.status(error.status || 500).end(error.message || 'Internal server error');
+  }
+})
 
 // productRouter.get("/", async (req, res) => {
 //   try {
